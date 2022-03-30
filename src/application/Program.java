@@ -2,7 +2,6 @@ package application;
 
 import java.util.Locale;
 import java.util.Scanner;
-
 import entities.Account;
 
 public class Program {
@@ -46,7 +45,6 @@ public class Program {
 		account.withdraw(withdrawValue);
 		System.out.println("Updated account data: ");
 		System.out.println(account);
-
 		sc.close();
 	}
 }
