@@ -1,39 +1,50 @@
 package application;
 
-import java.text.ParseException;
+import java.util.Locale;
 import java.util.Scanner;
-import entities.Rent;
+import entities.Account;
 
 public class Program {
-	
-	public static void main(String[] args) throws ParseException {
-		
+
+	public static void main(String[] args) {
+
+		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		
-		Rent[] vect = new Rent[10];
-		
-		System.out.print("How many rooms will be rented? ");
-		int n = sc.nextInt();
-		
-		for (int i = 1; i <= n; i++) {
-			System.out.println();
-			System.out.println("Rent #" + i + ":");
-			System.out.print("Name: ");
-			sc.nextLine();
-			String name = sc.nextLine();
-			System.out.print("Email: ");
-			String email = sc.nextLine();
-			System.out.print("Room: ");
-			int room = sc.nextInt();
-			vect[room] = new Rent(name, email);
+		Account account;
+
+		System.out.print("Enter account number: ");
+		int number = sc.nextInt();
+		System.out.println("Enter account holder: ");
+		sc.nextLine();
+		String holder = sc.nextLine();
+		System.out.println("Is there na initial deposit (y/n)?");
+		char response = sc.next().charAt(0);
+
+		if (response == 'y') {
+			System.out.print("Enter initial deposit value: ");
+			double initialDeposit = sc.nextDouble();
+			account = new Account(number, holder, initialDeposit);
+		} else {
+			account = new Account(number, holder);
 		}
+
 		System.out.println();
-		System.out.println("Busy rooms:");
-		for (int i = 0; i < 10; i++) {
-			if (vect[i] != null) {
-				System.out.println(i + ": " + vect[i]);
-			}
-		}
+		System.out.println("Account data: ");
+		System.out.println(account);
+
+		System.out.println();
+		System.out.print("Enter a deposit value: ");
+		double depositValue = sc.nextDouble();
+		account.deposit(depositValue);
+		System.out.println("Updated account data: ");
+		System.out.println(account);
+
+		System.out.println();
+		System.out.print("Enter a withdraw value: ");
+		double withdrawValue = sc.nextDouble();
+		account.withdraw(withdrawValue);
+		System.out.println("Updated account data: ");
+		System.out.println(account);
 		sc.close();
 	}
 }
